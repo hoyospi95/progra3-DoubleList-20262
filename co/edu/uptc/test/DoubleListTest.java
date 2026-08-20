@@ -13,8 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import co.edu.uptc.structures.DoubleList;
 
-public class DoubleListTest {
-private List<String> list;
+public class DoubleListTest {	
+	private List<String> list;
 
 	@BeforeEach
 	void setUpBeforeEach() throws Exception {
@@ -195,13 +195,10 @@ private List<String> list;
 		assertEquals("pablo", list.get(list.size()-1));
 	}
 
-
-
 	@Test
 	void testSubList() {
 		List<?> subList= list.subList(0, 1);
 		assertEquals(true, subList.get(0).equals("juan"));
 	}
-
 
 }
