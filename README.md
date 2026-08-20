@@ -2,5 +2,5 @@
 
 Implementación colaborativa de la lista doblemente enlazada
 
-´´´java
+```java
 public class DoubleList<E> implements List<E>
