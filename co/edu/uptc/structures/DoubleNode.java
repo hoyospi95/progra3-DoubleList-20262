@@ -37,7 +37,7 @@ public class DoubleNode<E> {
 
 	@Override
 	public String toString() {
-		return "DoubleNode [value=" + value + ", previous=" + previous + ", next=" + next + "]";
+		return "DoubleNode [value=" + value + ", next=" + next + "]";
 	}
 
 }

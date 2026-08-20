@@ -54,8 +54,18 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public boolean add(E e) {
-		// TODO Auto-generated method stub
-		return false;
+		DoubleNode<E> newNode = new DoubleNode<E>(e);
+		if(head == null){
+			head = newNode;
+		}else{
+			DoubleNode<E> aux = head;
+			while(aux.getNext() != null){
+				aux = aux.getNext();
+			}
+			newNode.setPrevious(aux);
+			aux.setNext(newNode);
+		}
+		return true;
 	}
 
 	@Override
@@ -159,4 +169,18 @@ public class DoubleList<E> implements List<E> {
 		return "DoubleList [head=" + head + "]";
 	}
 
+	public String toStringReverse() {
+		StringBuilder reverse = new StringBuilder();
+		if(head != null){
+			DoubleNode<E> aux = head;
+			while(aux.getNext() != null){
+				aux = aux.getNext();
+			}
+			while(aux != null){
+				reverse.append(aux.getValue() + " -> ");
+				aux = aux.getPrevious();
+			}
+		}
+		return "DoubleList [" + reverse + "]";
+	}
 }
