@@ -19,32 +19,66 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		int i = 0;
+		DoubleNode<E> aux = head;
+		while(aux != null) {
+			i++;
+			aux = aux.getNext();
+		}
+		return i;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return head == null;
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
+		DoubleNode <E> aux = head;
+		if (o==null ? aux==null : o.equals(aux)) {
+			aux = aux.getNext();
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		Iterator<E> iterator = new Iterator<E>() {
+			DoubleNode<E> temporalNode = head;
+
+			@Override
+			public boolean hasNext() {
+				if(temporalNode.getNext() != null){
+					return true;
+				}
+				return false;
+			}
+
+			@Override
+			public E next() {
+				if(!hasNext()){
+					return temporalNode.getValue();
+				}
+				E outro = temporalNode.getValue();
+				temporalNode = temporalNode.getNext();
+				return outro;
+			}
+		};
+		return iterator;
 	}
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		int size = size();
+		Object[] array = new Object[size];
+		DoubleNode<E> aux = head;
+		for(int i = 0; i < size; i++){
+			array[i] = aux.getValue();
+			aux = aux.getNext();
+		}
+		return array;
 	}
 
 	@Override
@@ -77,8 +111,17 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		if (c == null) new NullPointerException();
+
+		for (Object object : c) {
+			if (object == null) throw new NullPointerException();
+		}
+
+		for (Object object : c) {
+			if(!contains(object)) return false;
+		}
+
+		return true;
 	}
 
 	@Override
@@ -107,8 +150,7 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-
+		head = null;
 	}
 
 	@Override
@@ -119,7 +161,17 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public E set(int index, E element) {
-		// TODO Auto-generated method stub
+		DoubleNode<E> current = head;
+		int counter = 0;
+		while(current != null){
+			if(counter == index){
+				E replaced = current.getValue();
+				current.setValue(element);
+				return replaced;
+			}
+			current = current.getNext();
+			counter++;
+		}
 		return null;
 	}
 
