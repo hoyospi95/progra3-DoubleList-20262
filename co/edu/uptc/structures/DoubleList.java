@@ -107,7 +107,6 @@ public class DoubleList<E> implements List<E> {
 	@Override
 	public void clear() {
 		head = null;
-		
 	}
 
 	@Override
