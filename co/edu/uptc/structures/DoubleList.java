@@ -130,8 +130,40 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		if (index >= size() || index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		DoubleNode<E> positionNow = head;
+		E value = null;
+		int indexNow = 0;
+
+		while (positionNow != null ) {
+			if (indexNow == index){
+				value = positionNow.getValue();
+				if (positionNow.getPrevious() == null){
+					head = positionNow.getNext();
+					if (head != null){
+						head.setPrevious(null);
+					}
+					return value;
+				}
+				else if (positionNow.getNext() != null) {
+					positionNow.getPrevious().setNext(positionNow.getNext());
+					positionNow.getNext().setPrevious(positionNow.getPrevious());
+					return value;
+				}
+				else {
+					positionNow.getPrevious().setNext(null);
+					return value;
+				}
+			}
+			else {
+				positionNow = positionNow.getNext();
+				indexNow++;
+			}
+		}
+		return value;
 	}
 
 	@Override
