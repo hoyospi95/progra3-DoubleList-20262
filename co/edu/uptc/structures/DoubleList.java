@@ -118,7 +118,17 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public E set(int index, E element) {
-		// TODO Auto-generated method stub
+		DoubleNode<E> current = head;
+		int counter = 0;
+		while(current != null){
+			if(counter == index){
+				E replaced = current.getValue();
+				current.setValue(element);
+				return replaced;
+			}
+			current = current.getNext();
+			counter++;
+		}
 		return null;
 	}
 
