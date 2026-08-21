@@ -111,9 +111,12 @@ public class DoubleList<E> implements List<E> {
 	}
 
 	@Override
-	public E get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+	public E get(int index) throws IndexOutOfBoundsException {
+		DoubleNode <E> current = head;
+		for(int i =0; i<index; i++){
+			current = current.getNext();
+		}
+		return current.getValue();
 	}
 
 	@Override
