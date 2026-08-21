@@ -10,8 +10,8 @@ import java.util.Queue;
 
 public class DoubleList<E> implements List<E> {
 	private DoubleNode<E> head;
-	
-	
+
+
 	public DoubleList() {
 		this.head = null;
 	}
@@ -80,11 +80,24 @@ public class DoubleList<E> implements List<E> {
 		return false;
 	}
 
-	@Override
-	public boolean addAll(Collection<? extends E> c) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    /**
+     * Agrega todos los elementos de una colección al final de esta lista.
+     * <p>
+     *
+     * @param c colección que se quiere agregar a esta lista
+     * @return {@code true} si los elementos de la colección se agregaron;
+     * {@code false} si la colección está vacía
+     */
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        if (c.isEmpty()) {
+            return false;
+        }
+        for (E element : c) {
+            add(element);
+        }
+        return true;
+    }
 
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
@@ -107,7 +120,7 @@ public class DoubleList<E> implements List<E> {
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -125,7 +138,7 @@ public class DoubleList<E> implements List<E> {
 	@Override
 	public void add(int index, E element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
