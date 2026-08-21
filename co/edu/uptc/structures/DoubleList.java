@@ -206,8 +206,16 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		DoubleNode<E> current = head;
+		int index = 0;
+		while (current != null) {
+			if (java.util.Objects.equals(current.getValue(), o)) {
+				return index;
+			}
+			current = current.getNext();
+			index++;
+		}
+		return -1;
 	}
 
 	@Override
