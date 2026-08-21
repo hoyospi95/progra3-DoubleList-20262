@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Queue;
 
+import javafx.scene.Node;
+
 public class DoubleList<E> implements List<E> {
 	private DoubleNode<E> head;
 
@@ -89,11 +91,11 @@ public class DoubleList<E> implements List<E> {
 	@Override
 	public boolean add(E e) {
 		DoubleNode<E> newNode = new DoubleNode<E>(e);
-		if(head == null){
+		if (head == null) {
 			head = newNode;
-		}else{
+		} else {
 			DoubleNode<E> aux = head;
-			while(aux.getNext() != null){
+			while (aux.getNext() != null) {
 				aux = aux.getNext();
 			}
 			newNode.setPrevious(aux);
@@ -210,8 +212,20 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public int lastIndexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		DoubleNode<E> actual = head;
+		int i = 0;
+		while (actual != null) {
+			if (actual.getValue().equals(o)) {
+				return 0;
+			} else {
+				i++;
+				actual = actual.getNext();
+			}
+
+		}
+		return i;
+
 	}
 
 	@Override
@@ -239,12 +253,12 @@ public class DoubleList<E> implements List<E> {
 
 	public String toStringReverse() {
 		StringBuilder reverse = new StringBuilder();
-		if(head != null){
+		if (head != null) {
 			DoubleNode<E> aux = head;
-			while(aux.getNext() != null){
+			while (aux.getNext() != null) {
 				aux = aux.getNext();
 			}
-			while(aux != null){
+			while (aux != null) {
 				reverse.append(aux.getValue() + " -> ");
 				aux = aux.getPrevious();
 			}
