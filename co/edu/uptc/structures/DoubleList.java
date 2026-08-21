@@ -242,9 +242,25 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	    if (fromIndex < 0 || toIndex > size() || fromIndex > toIndex) {
+	        throw new IndexOutOfBoundsException("Rango no es válido");
+	    }
+
+	    DoubleList<E> result = new DoubleList<>();
+	    DoubleNode<E> aux = head;
+	    
+	    for (int i = 0; i < fromIndex; i++) {
+	        aux = aux.getNext();
+	    }
+	    
+	    for (int i = fromIndex; i < toIndex; i++) {
+	        result.add(aux.getValue()); 
+	        aux = aux.getNext();
+	    }
+	    
+	    return result;
 	}
+	
 
 	@Override
 	public String toString() {
