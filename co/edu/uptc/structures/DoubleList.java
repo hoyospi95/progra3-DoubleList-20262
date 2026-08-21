@@ -100,7 +100,6 @@ public class DoubleList<E> implements List<E> {
 			add(currentIndex, element);
 			currentIndex++;
 		}
-
 		return true;
 	}
 
