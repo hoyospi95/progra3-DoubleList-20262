@@ -109,8 +109,7 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		head = null;
 	}
 
 	@Override
