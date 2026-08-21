@@ -90,8 +90,17 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		if (c == null) new NullPointerException();
+
+		for (Object object : c) {
+			if (object == null) throw new NullPointerException();
+		}
+
+		for (Object object : c) {
+			if(!contains(object)) return false;
+		}
+
+		return true;
 	}
 
 	@Override
