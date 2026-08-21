@@ -29,7 +29,11 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
+		DoubleNode <E> aux = head;
+		if (o==null ? aux==null : o.equals(aux)) {
+			aux = aux.getNext();
+			return true;
+		}
 		return false;
 	}
 
