@@ -24,8 +24,7 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return head == null;
 	}
 
 	@Override
