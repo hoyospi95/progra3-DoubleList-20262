@@ -18,8 +18,13 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		int i = 0;
+		DoubleNode<E> aux = head;
+		while(aux != null) {
+			i++;
+			aux = aux.getNext();
+		}
+		return i;
 	}
 
 	@Override
