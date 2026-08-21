@@ -36,8 +36,28 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		Iterator<E> iterator = new Iterator<E>() {
+			DoubleNode<E> temporalNode = head;
+
+			@Override
+			public boolean hasNext() {
+				if(temporalNode.getNext() != null){
+					return true;
+				}
+				return false;
+			}
+
+			@Override
+			public E next() {
+				if(!hasNext()){
+					return temporalNode.getValue();
+				}
+				E outro = temporalNode.getValue();
+				temporalNode = temporalNode.getNext();
+				return outro;
+			}
+		};
+		return iterator;
 	}
 
 	@Override
