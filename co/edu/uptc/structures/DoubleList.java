@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Queue;
 
+import javafx.scene.Node;
+
 public class DoubleList<E> implements List<E> {
 	private DoubleNode<E> head;
 
@@ -228,14 +230,34 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		DoubleNode<E> current = head;
+		int index = 0;
+		while (current != null) {
+			if (java.util.Objects.equals(current.getValue(), o)) {
+				return index;
+			}
+			current = current.getNext();
+			index++;
+		}
+		return -1;
 	}
 
 	@Override
 	public int lastIndexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		DoubleNode<E> actual = head;
+		int i = 0;
+		while (actual != null) {
+			if (actual.getValue().equals(o)) {
+				return 0;
+			} else {
+				i++;
+				actual = actual.getNext();
+			}
+
+		}
+		return i;
+
 	}
 
 	@Override
@@ -252,9 +274,25 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	    if (fromIndex < 0 || toIndex > size() || fromIndex > toIndex) {
+	        throw new IndexOutOfBoundsException("Rango no es válido");
+	    }
+
+	    DoubleList<E> result = new DoubleList<>();
+	    DoubleNode<E> aux = head;
+	    
+	    for (int i = 0; i < fromIndex; i++) {
+	        aux = aux.getNext();
+	    }
+	    
+	    for (int i = fromIndex; i < toIndex; i++) {
+	        result.add(aux.getValue()); 
+	        aux = aux.getNext();
+	    }
+	    
+	    return result;
 	}
+	
 
 	@Override
 	public String toString() {
