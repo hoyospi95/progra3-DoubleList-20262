@@ -10,8 +10,8 @@ import java.util.Queue;
 
 public class DoubleList<E> implements List<E> {
 	private DoubleNode<E> head;
-	
-	
+
+
 	public DoubleList() {
 		this.head = null;
 	}
@@ -88,8 +88,20 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
-		// TODO Auto-generated method stub
-		return false;
+		if (index < 0 || index > size()) {
+			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size());
+		}
+		if (c == null || c.isEmpty()) {
+			return false;
+		}
+
+		int currentIndex = index;
+		for (E element : c) {
+			add(currentIndex, element);
+			currentIndex++;
+		}
+
+		return true;
 	}
 
 	@Override
@@ -107,7 +119,7 @@ public class DoubleList<E> implements List<E> {
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -125,7 +137,7 @@ public class DoubleList<E> implements List<E> {
 	@Override
 	public void add(int index, E element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
