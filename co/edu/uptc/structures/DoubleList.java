@@ -10,8 +10,7 @@ import java.util.Queue;
 
 public class DoubleList<E> implements List<E> {
 	private DoubleNode<E> head;
-	
-	
+
 	public DoubleList() {
 		this.head = null;
 	}
@@ -55,11 +54,11 @@ public class DoubleList<E> implements List<E> {
 	@Override
 	public boolean add(E e) {
 		DoubleNode<E> newNode = new DoubleNode<E>(e);
-		if(head == null){
+		if (head == null) {
 			head = newNode;
-		}else{
+		} else {
 			DoubleNode<E> aux = head;
-			while(aux.getNext() != null){
+			while (aux.getNext() != null) {
 				aux = aux.getNext();
 			}
 			newNode.setPrevious(aux);
@@ -107,7 +106,7 @@ public class DoubleList<E> implements List<E> {
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -124,8 +123,28 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
-		// TODO Auto-generated method stub
-		
+		DoubleNode<E> newNode = new DoubleNode<>(element);
+		DoubleNode<E> aux = head;
+
+		if (index == 0) {
+			newNode.setPrevious(null);
+			newNode.setNext(head);
+			if (head != null) {
+				head.setPrevious(newNode);
+			}
+			head = newNode;
+		} else {
+			for (int i = 0; i < index - 1; i++) {
+				aux = aux.getNext();
+			}
+			newNode.setNext(aux.getNext());
+			newNode.setPrevious(aux);
+
+			if (aux.getNext() != null) {
+				aux.getNext().setPrevious(newNode);
+			}
+			aux.setNext(newNode);
+		}
 	}
 
 	@Override
@@ -171,12 +190,12 @@ public class DoubleList<E> implements List<E> {
 
 	public String toStringReverse() {
 		StringBuilder reverse = new StringBuilder();
-		if(head != null){
+		if (head != null) {
 			DoubleNode<E> aux = head;
-			while(aux.getNext() != null){
+			while (aux.getNext() != null) {
 				aux = aux.getNext();
 			}
-			while(aux != null){
+			while (aux != null) {
 				reverse.append(aux.getValue() + " -> ");
 				aux = aux.getPrevious();
 			}

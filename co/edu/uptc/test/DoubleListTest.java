@@ -11,9 +11,10 @@ import java.util.ListIterator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import co.edu.uptc.structures.DoubleList;
 
-public class DoubleListTest {	
+public class DoubleListTest {
 	private List<String> list;
 
 	@BeforeEach
@@ -163,41 +164,40 @@ public class DoubleListTest {
 	void testListIterator() {
 		ListIterator<String> iterator = list.listIterator();
 		assertTrue(iterator.hasNext());
-        assertEquals("juan", iterator.next());
+		assertEquals("juan", iterator.next());
 
-        assertTrue(iterator.hasNext());
-        assertEquals("lola", iterator.next());
+		assertTrue(iterator.hasNext());
+		assertEquals("lola", iterator.next());
 
-        assertFalse(iterator.hasNext());
-      
-        assertTrue(iterator.hasPrevious());
-        assertEquals("lola", iterator.previous());
+		assertFalse(iterator.hasNext());
 
-        assertTrue(iterator.hasPrevious());
-        assertEquals("juan", iterator.previous());
+		assertTrue(iterator.hasPrevious());
+		assertEquals("lola", iterator.previous());
 
-        assertFalse(iterator.hasPrevious());
-        
-        iterator.next();
-        iterator.remove();
-        assertEquals(1, list.size());  
-        
-        iterator = list.listIterator();
-        iterator.next();
-        iterator.set("javier");
-        assertEquals("javier", list.listIterator().next());
+		assertTrue(iterator.hasPrevious());
+		assertEquals("juan", iterator.previous());
 
-        
-        iterator.remove();
-        assertEquals(0, list.size()); 
-        
-        iterator.add("pablo");	
-		assertEquals("pablo", list.get(list.size()-1));
+		assertFalse(iterator.hasPrevious());
+
+		iterator.next();
+		iterator.remove();
+		assertEquals(1, list.size());
+
+		iterator = list.listIterator();
+		iterator.next();
+		iterator.set("javier");
+		assertEquals("javier", list.listIterator().next());
+
+		iterator.remove();
+		assertEquals(0, list.size());
+
+		iterator.add("pablo");
+		assertEquals("pablo", list.get(list.size() - 1));
 	}
 
 	@Test
 	void testSubList() {
-		List<?> subList= list.subList(0, 1);
+		List<?> subList = list.subList(0, 1);
 		assertEquals(true, subList.get(0).equals("juan"));
 	}
 
