@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Queue;
 
-import javafx.scene.Node;
+import org.w3c.dom.Node;
 
 public class DoubleList<E> implements List<E> {
 	private DoubleNode<E> head;
@@ -152,8 +152,41 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		if (head == null || c == null) {
+			return false;
+		}
+
+		boolean isChange = false;
+		DoubleNode<E> aux = head;
+
+		while (aux != null) {
+			DoubleNode<E> current = aux.getNext();
+			for (Iterator<?> i = c.iterator(); i.hasNext();) {
+				Object item = i.next();
+				if (item.equals(aux.getValue())) {
+					isChange = true;
+					if (aux == head) {
+						head = aux.getNext();
+						if (head != null) {
+							head.setPrevious(null);
+						}
+					} else {
+						DoubleNode<E> previusNode = aux.getPrevious();
+						DoubleNode<E> nextNode = aux.getNext();
+
+						previusNode.setNext(aux.getNext());
+						if (nextNode != null) {
+							nextNode.setPrevious(aux.getPrevious());
+						}
+
+					}
+					break;
+				}
+			}
+			aux = current;
+
+		}
+		return isChange;
 	}
 
 	@Override
