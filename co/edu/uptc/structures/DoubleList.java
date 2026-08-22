@@ -327,8 +327,117 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public ListIterator<E> listIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ListIterator<E>() {
+
+			private DoubleNode<E> current = head;
+			private DoubleNode<E> previous = null;
+			private DoubleNode<E> lastReturned = null;
+			private int nextIndex = 0;
+			private boolean lastOperationWasNext = false;
+
+			@Override
+			public boolean hasNext() {
+				return current != null;
+			}
+
+			@Override
+			public E next() {
+				if (!hasNext()) {
+					throw new java.util.NoSuchElementException();
+				}
+				lastReturned = current;
+				E value = current.getValue();
+				previous = current;
+				current = current.getNext();
+				nextIndex++;
+				lastOperationWasNext = true;
+				return value;
+			}
+
+			@Override
+			public boolean hasPrevious() {
+				return previous != null;
+			}
+
+			@Override
+			public E previous() {
+				if (!hasPrevious()) {
+					throw new java.util.NoSuchElementException();
+				}
+				lastReturned = previous;
+				E value = previous.getValue();
+				current = previous;
+				previous = previous.getPrevious();
+				nextIndex--;
+				lastOperationWasNext = false;
+				return value;
+			}
+
+			@Override
+			public int nextIndex() {
+				return nextIndex;
+			}
+
+			@Override
+			public int previousIndex() {
+				return nextIndex - 1;
+			}
+
+			@Override
+			public void remove() {
+				if (lastReturned == null) {
+					throw new IllegalStateException();
+				}
+
+				DoubleNode<E> before = lastReturned.getPrevious();
+				DoubleNode<E> after = lastReturned.getNext();
+
+				if (before == null) {
+					head = after;
+				} else {
+					before.setNext(after);
+				}
+
+				if (after != null) {
+					after.setPrevious(before);
+				}
+
+				if (lastOperationWasNext) {
+					previous = before;
+					nextIndex--;
+				} else {
+					current = after;
+					previous = before;
+				}
+				lastReturned = null;
+			}
+
+			@Override
+			public void set(E e) {
+				if (lastReturned == null) {
+					throw new IllegalStateException();
+				}
+				lastReturned.setValue(e);
+			}
+
+			@Override
+			public void add(E e) {
+				DoubleNode<E> newNode = new DoubleNode<E>(e);
+				newNode.setPrevious(previous);
+				newNode.setNext(current);
+				if (previous == null) {
+					head = newNode;
+				} else {
+					previous.setNext(newNode);
+				}
+				if (current != null) {
+					current.setPrevious(newNode);
+				}
+				previous = newNode;
+				nextIndex++;
+				lastReturned = null;
+			}
+		};
 	}
 
 	@Override
