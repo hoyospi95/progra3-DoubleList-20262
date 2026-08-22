@@ -191,8 +191,29 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		DoubleNode<E> current = head;
+
+		while (current != null) {
+			DoubleNode<E> next = current.getNext();
+
+			if (!c.contains(current.getValue())) {
+				DoubleNode<E> previous = current.getPrevious();
+
+				if (previous != null) {
+					previous.setNext(next);
+				}else{
+					head = next;
+				}
+
+				if (next != null) {
+					next.setPrevious(previous);
+				}
+				result = true;
+			}
+			current = next;
+		}
+		return result;
 	}
 
 	@Override
