@@ -199,6 +199,7 @@ public class DoubleList<E> implements List<E> {
 	public void clear() {
 		// TODO Auto-generated method stub
 
+		head = null;
 	}
 
 	@Override
@@ -228,14 +229,68 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
+		DoubleNode<E> newNode = new DoubleNode<>(element);
+		DoubleNode<E> aux = head;
+
+		if (index == 0) {
+			newNode.setPrevious(null);
+			newNode.setNext(head);
+			if (head != null) {
+				head.setPrevious(newNode);
+			}
+			head = newNode;
+		} else {
+			for (int i = 0; i < index - 1; i++) {
+				aux = aux.getNext();
+			}
+			newNode.setNext(aux.getNext());
+			newNode.setPrevious(aux);
+
+			if (aux.getNext() != null) {
+				aux.getNext().setPrevious(newNode);
+			}
+			aux.setNext(newNode);
+		}
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		if (index >= size() || index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		DoubleNode<E> positionNow = head;
+		E value = null;
+		int indexNow = 0;
+
+		while (positionNow != null ) {
+			if (indexNow == index){
+				value = positionNow.getValue();
+				if (positionNow.getPrevious() == null){
+					head = positionNow.getNext();
+					if (head != null){
+						head.setPrevious(null);
+					}
+					return value;
+				}
+				else if (positionNow.getNext() != null) {
+					positionNow.getPrevious().setNext(positionNow.getNext());
+					positionNow.getNext().setPrevious(positionNow.getPrevious());
+					return value;
+				}
+				else {
+					positionNow.getPrevious().setNext(null);
+					return value;
+				}
+			}
+			else {
+				positionNow = positionNow.getNext();
+				indexNow++;
+			}
+		}
+		return value;
 	}
 
 	@Override
