@@ -164,6 +164,8 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public void clear() {
+		// TODO Auto-generated method stub
+
 		head = null;
 	}
 
@@ -194,6 +196,28 @@ public class DoubleList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
+		DoubleNode<E> newNode = new DoubleNode<>(element);
+		DoubleNode<E> aux = head;
+
+		if (index == 0) {
+			newNode.setPrevious(null);
+			newNode.setNext(head);
+			if (head != null) {
+				head.setPrevious(newNode);
+			}
+			head = newNode;
+		} else {
+			for (int i = 0; i < index - 1; i++) {
+				aux = aux.getNext();
+			}
+			newNode.setNext(aux.getNext());
+			newNode.setPrevious(aux);
+
+			if (aux.getNext() != null) {
+				aux.getNext().setPrevious(newNode);
+			}
+			aux.setNext(newNode);
+		}
 		// TODO Auto-generated method stub
 
 	}
